@@ -1,6 +1,5 @@
-import Likefill from "../../assets/likefill.svg";
-
-const LikeButton = () => {
+import Likefill from "../../assets/Dislikefill.svg";
+const DisLike = () => {
   return (
     <button className={`like-button `}>
       <img src={Likefill} alt="" />
@@ -8,4 +7,4 @@ const LikeButton = () => {
   );
 };
 
-export default LikeButton;
+export default DisLike;
