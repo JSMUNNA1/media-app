@@ -91,7 +91,7 @@ const CreatePost = () => {
           value={formData.title}
           error={error.title}
           onChange={handleChange}
-          maxlength={"200"}
+          maxLength={"200"}
         />
 
         {/* Body Input */}
@@ -102,7 +102,7 @@ const CreatePost = () => {
           value={formData.body}
           error={error.body}
           onChange={handleChange}
-          maxlength={"300"}
+          maxLength={"300"}
         />
 
         {/* Image Upload */}

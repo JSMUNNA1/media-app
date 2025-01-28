@@ -87,7 +87,7 @@ export default function UpdatePost() {
           value={formData.title}
           error={error.title}
           onChange={handleChange}
-          maxlength={"200"}
+          maxLength={"200"}
         />
 
         {/* Body Input */}
@@ -98,7 +98,7 @@ export default function UpdatePost() {
           value={formData.body}
           error={error.body}
           onChange={handleChange}
-          maxlength={"300"}
+          maxLength={"300"}
         />
 
         {/* Image Upload */}

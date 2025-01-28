@@ -61,7 +61,7 @@ export default function Comment({ post = {} }) {
                 type="text"
                 label="comment"
                 name="comment"
-                maxlength={"200"}
+                maxLength={"200"}
                 value={formData.comment}
                 onChange={handleChange}
               />
