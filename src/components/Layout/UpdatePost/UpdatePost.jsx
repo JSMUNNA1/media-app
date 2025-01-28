@@ -77,7 +77,7 @@ export default function UpdatePost() {
         onSubmit={handleSubmit}
         className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg"
       >
-        <h1 className="text-xl font-bold mb-4">Create Post</h1>
+        <h1 className="text-xl font-bold mb-4">Update Post</h1>
 
         {/* Title Input */}
         <Inputfield
