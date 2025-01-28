@@ -69,7 +69,7 @@ export default function Comment({ post = {} }) {
             <div className="mb-7  ">
               <button
                 type="submit"
-                className="bg-blue-950 lg:w-[120px] md:mr-10 md:w-[320px] w-[180px] h-[40px] text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
+                className="bg-blue-950 lg:w-[120px] md:mr-10 md:w-[320px] w-[200px] h-[40px] text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
               >
                 Add
               </button>

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import profile from "../../assets/Header/profile.png";
 
 export default function CommentCard({ comment, handleDeleteComment, index }) {
@@ -15,13 +16,13 @@ export default function CommentCard({ comment, handleDeleteComment, index }) {
           </div>
         </div>
         {/* Body */}
-        <div className="mt-2 ml-3">
+        <div className="mt-2 ml-3 mb-2">
           <div className="flex justify-between items-center">
             <p className="w-[70%] break-words">{comment}</p>
             {/* Delete Button */}
             <button
               onClick={() => handleDeleteComment(index)}
-              className="bg-transparent border-red-200 border-2 text-red-400 w-[80px] h-[40px] py-2 px-4 rounded-lg hover:text-red-800 transition bg-orange-50"
+              className="bg-transparent border-red-200  text-red-400 w-[80px] h-[40px] py-2 px-4 rounded-lg hover:text-red-800 transition bg-orange-50 "
             >
               Delete
             </button>

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 //Action Type
   export  const FETCH_REQUEST="FETCH_REQUEST";
   export  const  DELETE_REQUEST="DELETE_REQUEST";
@@ -21,7 +22,7 @@ import axios from "axios";
       const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=3&_page=${page}`);
                 console.log("response Data=",response.data);
                
-    //  dispatch({ type: FETCH_TODOS_SUCCESS, payload: response.data });
+   
     const posts=response.data.map((data) => ({
       ...data,
       like: false,
@@ -29,15 +30,14 @@ import axios from "axios";
       comment: [],
       image:null
     }));
-       console.log( 'modify Resopnse=',posts);
-       
+
        let post= getStore().posts.posts;
-       console.log( "until",post);
+     
     
-      console.log("post data s=",posts);
+      
          if(post.length>0 && posts.length>0){
               post=[...post,...posts]
-                 console.log("post data in if",post);
+                
                  
               dispatch({ type:  FETCH_REQUEST,payload:post})
          }else if(posts.length>0){
@@ -47,24 +47,24 @@ import axios from "axios";
          }
                   
       
-     // dispatch({ type:  FETCH_REQUEST,payload:untilPost});
+     
     } catch (error) {
          alert(`Posts not  comes:${error}`)
     }
   };
   
   // Add a Post
-  export const addPost = (post) => async (dispatch,getState) => {
+  export const addPost = (post) => async (dispatch) => {
       
     try {
           
             const {image,body,id,title,userId}=post;
             
             const postData={body,id,title,userId}
-           console.log(postData);
+           
             
       const response = await axios.post("https://jsonplaceholder.typicode.com/posts", postData);
-           console.log(response.data,"ddddd");
+           
            const responseData=response.data
            const responseDatawith={
             ...responseData,
@@ -73,39 +73,38 @@ import axios from "axios";
             comment: [],
             image:image}
      dispatch({ type: CREATE_REQUEST, payload:responseDatawith });
-    const imageData= getState().posts.posts;
-    console.log("All Data=>",imageData);
+   
+   
     alert("Post create successfully!");
       
-      //console.log("Post Response=>",dispatch);
+    
      
     } catch (error) {
-      console.error("Not Post Created ", error);
+      alert("Not Post Created ", error);
     }
   };
   
   // Update a Post
-  export const updatePost = (id, updates) => async (dispatch,getState) => {
+  export const updatePost = (id, updates) => async (dispatch) => {
     try {
       const response = await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`, updates);
       dispatch({ type: UPDATE_REQUEST, payload: response.data });
       alert("Post updated successfully!");
-      console.log("After Updated=>", getState().posts);
+      
     } catch (error) {
       alert("Error updating Post:", error);
     }
   };
   
   // Delete a Post
-  export const deletePost = (id) => async (dispatch,getState) => {
+  export const deletePost = (id) => async (dispatch) => {
     try {
       await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
       dispatch({ type: DELETE_REQUEST, payload: id });
-
-        console.log("After Delete=>", getState().posts);
+       alert("Post Deleted")
         
     } catch (error) {
-     alert("Error deleting Post:", error);
+     alert("Error in deleting Post:", error);
     }
   };
 

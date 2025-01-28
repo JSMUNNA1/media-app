@@ -2,9 +2,7 @@ import { useSelector } from "react-redux";
 import Card from "../Card/Card";
 export default function ShowPosts() {
   const { posts } = useSelector((state) => state.posts);
-  console.log("====================================");
-  console.log(posts, "show");
-  console.log("====================================");
+
   return (
     <div>
       <div className="">

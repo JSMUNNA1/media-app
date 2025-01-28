@@ -12,9 +12,6 @@ export default function Home() {
   const [page, setPage] = useState(1);
 
   const handelInfiniteScroll = async () => {
-    // console.log("scrollHeight" + document.documentElement.scrollHeight);
-    // console.log("innerHeight" + window.innerHeight);
-    // console.log("scrollTop" + document.documentElement.scrollTop);
     try {
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -39,7 +36,6 @@ export default function Home() {
       <div className="">
         {posts?.length > 0 ? (
           posts.map((post, el) => {
-            console.log("Scroll Data:=", post);
             return <Card key={el.id} post={post} />;
           })
         ) : (

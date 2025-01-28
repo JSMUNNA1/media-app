@@ -6,7 +6,6 @@ export default function DeletePost({ post }) {
   const { id } = post;
   const dispatch = useDispatch();
   const handleDelete = () => {
-    console.log(id, "Delete");
     dispatch(deletePost(id));
   };
 

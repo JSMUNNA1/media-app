@@ -14,7 +14,6 @@ import DeletePost from "../Layout/DeletePost/DeletePost";
 
 import { useNavigate } from "react-router-dom";
 import updateIcon from "../../assets/updateicon.svg";
-import Loader from "../../assets/Components/Loading";
 
 export default function Card({ post }) {
   const [showComments, setShowComments] = useState(false);
@@ -28,8 +27,6 @@ export default function Card({ post }) {
   };
   //handle Update Components
   const handleUpdate = () => {
-    console.log(post);
-
     navigator("/update", { state: post });
   };
   // Like Functinality handle
@@ -61,7 +58,6 @@ export default function Card({ post }) {
     });
 
     dispatch({ type: FETCH_REQUEST, payload: unlikedPost });
-    console.log("UnLiked Post:", unlikedPost);
   };
 
   return (

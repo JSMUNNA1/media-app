@@ -8,7 +8,7 @@ export default function UpdatePost() {
   const dispatch = useDispatch();
   const location = useLocation();
   const post = location.state;
-  console.log(post);
+
   const [formData, setFormData] = useState({
     title: post.title,
     body: post.body,
@@ -60,15 +60,14 @@ export default function UpdatePost() {
       return;
     }
 
-    // Log the post data to console (or send to an API)
+    //  send to an API
     const postData = {
       ...formData,
-      image: URL.createObjectURL(formData.image), // For demonstration, log the image name
+      image: URL.createObjectURL(formData.image), // show the image name
     };
     dispatch(updatePost(post.id, postData));
-    console.log("Post Created:", postData);
 
-    // Optionally reset form after submission
+    //  reset form after submission
 
     setFormData({ title: "", body: "", image: null });
   };

@@ -67,7 +67,6 @@ const CreatePost = () => {
       image: URL.createObjectURL(formData.image), // For demonstration, log the image name
     };
     dispatch(addPost(postData, posts));
-    console.log("Post Created:", postData);
 
     // Optionally reset form after submission
     setUserID((e) => e + 1);
