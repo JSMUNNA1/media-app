@@ -13,8 +13,13 @@ export default function UnLikedPosts() {
   });
   return (
     <div>
-      {likedPosts?.length > 0 &&
-        likedPosts.map((post, el) => <Card key={el.id} post={post} />)}
+      {likedPosts?.length > 0 ? (
+        likedPosts.map((post, el) => <Card key={el.id} post={post} />)
+      ) : (
+        <div className="flex justify-center items-center">
+          <h1 className="text-2xl">you not Unlike any Post....</h1>
+        </div>
+      )}
     </div>
   );
 }
