@@ -9,13 +9,13 @@ export default function UpdatePost() {
   const dispatch = useDispatch();
   const location = useLocation();
   const post = location.state;
-  const fileInputRef = useRef(null); // Reference to reset input field
+  const fileInputRef = useRef(null); //  reset input field
 
   const [imagefromPost, setImagefromPost] = useState(post.image);
   const [formData, setFormData] = useState({
     title: post.title,
     body: post.body,
-    image: post.image, // Keep old image initially
+    image: post.image, 
   });
 
   const [error, setError] = useState({
