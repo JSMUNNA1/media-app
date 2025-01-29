@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Inputfield from "../../../assets/Components/Inputfield";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { updatePost } from "../../../Redux/Action";
 import { useDispatch } from "react-redux";
 
 export default function UpdatePost() {
+  const navigation = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const post = location.state;
+  const fileInputRef = useRef(null); // Reference to reset input field
+
   const [imagefromPost, setImagefromPost] = useState(post.image);
   const [formData, setFormData] = useState({
     title: post.title,
     body: post.body,
-    image: "",
+    image: post.image, // Keep old image initially
   });
 
   const [error, setError] = useState({
@@ -37,6 +40,7 @@ export default function UpdatePost() {
     }
 
     setFormData((prev) => ({ ...prev, image: file }));
+    setImagefromPost(URL.createObjectURL(file)); // Update preview
     setError((prev) => ({ ...prev, image: "" }));
   };
 
@@ -55,23 +59,21 @@ export default function UpdatePost() {
       return;
     }
 
-    if (!image) {
-      setError((prev) => ({ ...prev, image: "Image is required." }));
-      return;
-    }
-
-    //  send to an API
+    // Use the existing image if a new one is not uploaded
     const postData = {
       ...formData,
-      image: URL.createObjectURL(formData.image), // show the image name
+      image: image instanceof File ? URL.createObjectURL(image) : image,
     };
+
     dispatch(updatePost(post.id, postData));
 
-    //  reset form after submission
-
-    setFormData({ title: "", body: "", image: null });
-    setImagefromPost(null);
+    // Reset form after submission
+    setFormData({ title: "", body: "", image: post.image });
+    setImagefromPost(post.image);
+    if (fileInputRef.current) fileInputRef.current.value = ""; // Reset file input
+    navigation("/showposts");
   };
+
   return (
     <div>
       <form
@@ -110,30 +112,21 @@ export default function UpdatePost() {
             accept="image/jpeg"
             onChange={handleImageUpload}
             className="file-input"
+            ref={fileInputRef} // Reference to reset input field
           />
           {error.image && (
             <span className="text-sm text-red-500">{error.image}</span>
           )}
 
           {/* Display uploaded image preview */}
-          {formData.image ? (
+          {imagefromPost && (
             <div className="mt-2">
               <img
-                src={URL.createObjectURL(formData.image)}
+                src={imagefromPost}
                 alt="Uploaded Preview"
                 className="w-32 h-32 object-cover rounded-lg shadow"
               />
             </div>
-          ) : (
-            imagefromPost && (
-              <div className="mt-2">
-                <img
-                  src={imagefromPost}
-                  alt="Uploaded Preview"
-                  className="w-32 h-32 object-cover rounded-lg shadow"
-                />
-              </div>
-            )
           )}
         </div>
 
