@@ -63,7 +63,7 @@ export default function Header() {
             onMouseLeave={() => setIsDropdownOpen((prev) => !prev)}
           >
             <div className="cursor-pointer flex items-center space-x-2 hover:text-orange-300">
-              <span>Menu</span>
+              <span>categories</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
