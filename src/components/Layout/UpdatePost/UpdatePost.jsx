@@ -128,7 +128,7 @@ export default function UpdatePost() {
             imagefromPost && (
               <div className="mt-2">
                 <img
-                  src={post.image}
+                  src={imagefromPost}
                   alt="Uploaded Preview"
                   className="w-32 h-32 object-cover rounded-lg shadow"
                 />
