@@ -8,11 +8,11 @@ export default function UpdatePost() {
   const dispatch = useDispatch();
   const location = useLocation();
   const post = location.state;
-
+  const [imagefromPost, setImagefromPost] = useState(post.image);
   const [formData, setFormData] = useState({
     title: post.title,
     body: post.body,
-    image: post.image ? post.image : "",
+    image: "",
   });
 
   const [error, setError] = useState({
@@ -70,6 +70,7 @@ export default function UpdatePost() {
     //  reset form after submission
 
     setFormData({ title: "", body: "", image: null });
+    setImagefromPost(null);
   };
   return (
     <div>
@@ -115,7 +116,7 @@ export default function UpdatePost() {
           )}
 
           {/* Display uploaded image preview */}
-          {formData.image && (
+          {formData.image ? (
             <div className="mt-2">
               <img
                 src={URL.createObjectURL(formData.image)}
@@ -123,6 +124,16 @@ export default function UpdatePost() {
                 className="w-32 h-32 object-cover rounded-lg shadow"
               />
             </div>
+          ) : (
+            imagefromPost && (
+              <div className="mt-2">
+                <img
+                  src={post.image}
+                  alt="Uploaded Preview"
+                  className="w-32 h-32 object-cover rounded-lg shadow"
+                />
+              </div>
+            )
           )}
         </div>
 
