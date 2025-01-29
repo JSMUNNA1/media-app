@@ -8,6 +8,7 @@ export const CREATE_REQUEST = "CREATE_REQUEST";
 export const UPDATE_REQUEST = "UPDATE_REQUEST";
 export const LIKE = "LIKE";
 export const UNLIKE = "UNLIKE";
+import mainImg from "../assets/Trading collection/dog.png";
 
 // Fetch Posts with Infinite Scrolling
 export const fetchPost = (page) => async (dispatch, getStore) => {
@@ -21,7 +22,9 @@ export const fetchPost = (page) => async (dispatch, getStore) => {
       like: false,
       unlike: false,
       comment: [],
-      image: null,
+      likeCount:0,
+      disLikeCount:0,
+      image: mainImg,
     }));
 
     let existingPosts = getStore().posts.posts;
@@ -53,6 +56,8 @@ export const addPost = (post) => async (dispatch) => {
       like: false,
       unlike: false,
       comment: [],
+      likeCount:0,
+      disLikeCount:0,
       image: image,
     };
 
@@ -83,6 +88,7 @@ export const deletePost = (id) => async (dispatch) => {
   try {
     await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
     dispatch({ type: DELETE_REQUEST, payload: id });
+    
     alert("Post deleted successfully!");
   } catch (error) {
     alert("Error deleting post: ", error);
