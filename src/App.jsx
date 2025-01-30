@@ -7,10 +7,12 @@ import UpdatePost from "./components/Layout/UpdatePost/UpdatePost";
 import UnLikedPosts from "./components/Layout/UnLikePost/UnLike";
 
 import Home from "./components/Layout/Home";
+import RouterError from "./components/Error/RouterError";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <RouterError />,
     children: [
       {
         path: "/",
