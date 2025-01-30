@@ -9,6 +9,7 @@ export const UPDATE_REQUEST = "UPDATE_REQUEST";
 export const LIKE = "LIKE";
 export const UNLIKE = "UNLIKE";
 import mainImg from "../assets/Trading collection/dog.png";
+import { toast } from "react-toastify";
 
 // Fetch Posts with Infinite Scrolling
 export const fetchPost = (page) => async (dispatch, getStore) => {
@@ -62,9 +63,9 @@ export const addPost = (post) => async (dispatch) => {
     };
 
     dispatch({ type: CREATE_REQUEST, payload: newPost });
-    alert("Post created successfully!");
+    toast("Post created successfully!")
   } catch (error) {
-    alert("Error creating post: ", error);
+    toast(`Error creating post: ${error.message}`)
   }
 };
 
@@ -77,9 +78,9 @@ export const updatePost = (id, updates) => async (dispatch) => {
     );
 
     dispatch({ type: UPDATE_REQUEST, payload: response.data });
-    alert("Post updated successfully!");
+    toast(`Post id ${response.data.id} updated successfully!`)
   } catch (error) {
-    alert("Error updating post: ", error);
+    toast(`Error updating post: ${error.message}`)
   }
 };
 
@@ -89,8 +90,8 @@ export const deletePost = (id) => async (dispatch) => {
     await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
     dispatch({ type: DELETE_REQUEST, payload: id });
     
-    alert("Post deleted successfully!");
+     toast(`Post id :${1} deleted successfully!`)
   } catch (error) {
-    alert("Error deleting post: ", error);
+    toast("Error deleting post: ", error.message);
   }
 };
