@@ -10,10 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FETCH_REQUEST } from "../../Redux/Action";
 import UndoLike from "../../assets/Components/UndoLike";
 import UndoDisLike from "../../assets/Components/UndoDisLike";
-import DeletePost from "../Layout/DeletePost/DeletePost";
-
-import { useNavigate } from "react-router-dom";
-import updateIcon from "../../assets/updateicon.svg";
+import MenuKebab from "../../assets/Components/MenuKebab";
 
 export default function Card({ post }) {
   const [showComments, setShowComments] = useState(false);
@@ -21,14 +18,13 @@ export default function Card({ post }) {
   const [showDisLikes, setShowDisLikes] = useState(false);
   const { posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
-  const navigator = useNavigate();
+
   const toggleComments = () => {
     setShowComments((prev) => !prev);
   };
-  //handle Update Components
-  const handleUpdate = () => {
-    navigator("/update", { state: post });
-  };
+
+  // handle kebab-menu
+
   // Like Functinality handle
   const handleLike = () => {
     setShowLikes((e) => !e);
@@ -74,16 +70,10 @@ export default function Card({ post }) {
               <h3 className="text-lg">{`UserID: ${post.id}`}</h3>
             </div>
           </div>
-          {/* Delete */}
-          <div className=" flex mt-2 justify-between w-[20%]">
-            <DeletePost post={post} />
-            <div onClick={handleUpdate}>
-              <img
-                src={updateIcon}
-                className=" cursor-pointer w-full h-auto"
-                alt=""
-              />
-            </div>
+
+          {/* KebabMenu */}
+          <div>
+            <MenuKebab post={post} />
           </div>
         </div>
         {/* Title */}
