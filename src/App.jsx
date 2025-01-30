@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "react-tooltip/dist/react-tooltip.css";
 import MainLayout from "./components/Layout/MainLayout";
 import LikedPosts from "./components/Layout/LikePostLayout/LikedPosts";
 import CreatePost from "./components/Layout/CreatePost/CreatePost";

@@ -4,6 +4,7 @@ import menuKebab from "../../assets/menu-kebab.svg";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../Redux/Action";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
 export default function MenuKebab({ post }) {
   const dispatch = useDispatch();
   const [isshow, setIsShow] = useState(false);
@@ -48,7 +49,10 @@ export default function MenuKebab({ post }) {
             aria-expanded="true"
             aria-haspopup="true"
           >
-            <img src={menuKebab} alt="" />
+            <img id="menukebab-123" src={menuKebab} alt="" />
+            <Tooltip anchorSelect="#menukebab-123" place="bottom">
+              more
+            </Tooltip>
           </button>
         </div>
 
