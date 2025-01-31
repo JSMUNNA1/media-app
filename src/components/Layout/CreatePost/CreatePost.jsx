@@ -2,11 +2,13 @@ import { useState } from "react";
 import Inputfield from "../../../assets/Components/Inputfield";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../../Redux/Action";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const { posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const [userID, setUserID] = useState(1);
+  const navigator = useNavigate();
   const [ID, setID] = useState(1);
   const [formData, setFormData] = useState({
     userId: userID,
@@ -73,6 +75,7 @@ const CreatePost = () => {
     setID((e) => e + 1);
 
     setFormData({ userId: userID, id: ID, title: "", body: "", image: null });
+    navigator("/showposts");
   };
 
   return (

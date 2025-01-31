@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FETCH_REQUEST } from "../../Redux/Action";
+import { addComment, FETCH_REQUEST } from "../../Redux/Action";
 
 import Inputfield from "./Inputfield";
 import CommentCard from "./CommentCard";
@@ -30,19 +30,19 @@ export default function Comment({ post = {} }) {
   };
 
   const handleAddComment = (newComment) => {
-    const updatedPosts = posts.map((val) =>
-      val.id === post.id
-        ? { ...val, comment: [...(val.comment || []), newComment] }
-        : val
-    );
-
-    dispatch({ type: FETCH_REQUEST, payload: updatedPosts });
+    post.comments.unshift({
+      text: newComment,
+      like: false,
+      dislike: false,
+      reply: [],
+    });
+    dispatch(addComment(post));
   };
 
   const handleDeleteComment = (index) => {
     const updatedPosts = posts.map((val) =>
       val.id === post.id
-        ? { ...val, comment: val.comment.filter((_, i) => i !== index) }
+        ? { ...val, comments: val.comments.filter((_, i) => i !== index) }
         : val
     );
 
@@ -50,44 +50,42 @@ export default function Comment({ post = {} }) {
   };
 
   return (
-    <div className="bg-slate-100 mx-auto w-full min-h-[200px]">
-      <div>
-        <h2 className="text-2xl font-bold text-center">Comments</h2>
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6">
-          <div className="flex items-center  lg:flex-row  flex-col justify-between ">
-            <div className="w-[90%]">
-              <Inputfield
-                className="w-[90%]"
-                type="text"
-                label="comment"
-                name="comment"
-                maxLength={"200"}
-                value={formData.comment}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-7  ">
-              <button
-                type="submit"
-                className="bg-blue-950 lg:w-[120px] md:mr-10 md:w-[320px] w-[200px] h-[40px] text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        </form>
-
-        {Array.isArray(post?.comment) && post.comment.length > 0 ? (
-          post.comment.map((comment, index) => (
+    <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mx-auto">
+      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
+        Comments
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col lg:flex-row items-center   gap-4">
+          <Inputfield
+            className="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500"
+            type="text"
+            label="Comment"
+            name="comment"
+            maxLength={200}
+            value={formData.comment}
+            onChange={handleChange}
+          />
+          <button
+            type="submit"
+            className="bg-blue-800 text-white  lg:mb-5 py-2 px-6 rounded-lg hover:bg-blue-950 transition"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+      <div className="mt-6 space-y-4">
+        {Array.isArray(post?.comments) && post.comments.length > 0 ? (
+          post.comments.map((comment, index) => (
             <CommentCard
               key={index}
               comment={comment}
               handleDeleteComment={handleDeleteComment}
               index={index}
+              post={post}
             />
           ))
         ) : (
-          <p>No comments yet...</p>
+          <p className="text-center text-gray-500">No comments yet...</p>
         )}
       </div>
     </div>

@@ -8,6 +8,7 @@ export const CREATE_REQUEST = "CREATE_REQUEST";
 export const UPDATE_REQUEST = "UPDATE_REQUEST";
 export const LIKE = "LIKE";
 export const UNLIKE = "UNLIKE";
+export const ADD_COMMENT="ADD_COMMENT";
 import mainImg from "../assets/Trading collection/dog.png";
 import { toast } from "react-toastify";
 
@@ -22,7 +23,7 @@ export const fetchPost = (page) => async (dispatch, getStore) => {
       ...data,
       like: false,
       unlike: false,
-      comment: [],
+      comments: [],
       likeCount:0,
       disLikeCount:0,
       image: mainImg,
@@ -34,10 +35,10 @@ export const fetchPost = (page) => async (dispatch, getStore) => {
       const updatedPosts = page === 1 ? posts : [...existingPosts, ...posts];
       dispatch({ type: FETCH_REQUEST, payload: updatedPosts });
     } else {
-      alert("No more data available from the server.");
+      toast("No more data available from the server.");
     }
   } catch (error) {
-    alert(`Error fetching posts: ${error}`);
+    toast(`Error fetching posts: ${error}`);
   }
 };
 
@@ -51,16 +52,18 @@ export const addPost = (post) => async (dispatch) => {
       "https://jsonplaceholder.typicode.com/posts",
       postData
     );
-
+     
     const newPost = {
       ...response.data,
       like: false,
       unlike: false,
-      comment: [],
+      comments: [],
       likeCount:0,
       disLikeCount:0,
       image: image,
     };
+
+    
 
     dispatch({ type: CREATE_REQUEST, payload: newPost });
     toast("Post created successfully!")
@@ -90,8 +93,22 @@ export const deletePost = (id) => async (dispatch) => {
     await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
     dispatch({ type: DELETE_REQUEST, payload: id });
     
-     toast(`Post id :${1} deleted successfully!`)
+     toast(`Post id :${id} deleted successfully!`)
   } catch (error) {
     toast("Error deleting post: ", error.message);
   }
 };
+
+// Add Comment
+export const addComment = (post) => async (dispatch) => {
+  try {
+        
+        
+      dispatch({type:ADD_COMMENT,payload:post})
+    
+     
+  }catch(e){
+    console.log(e)
+  }
+     
+}
