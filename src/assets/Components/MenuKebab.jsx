@@ -1,4 +1,4 @@
-/* eslint-disable react/prte";op-types */
+/* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from "react";
 import menuKebab from "../../assets/menu-kebab.svg";
 import { useDispatch } from "react-redux";

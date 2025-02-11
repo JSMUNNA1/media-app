@@ -38,7 +38,7 @@ export const fetchPost = (page) => async (dispatch, getStore) => {
       toast("No more data available from the server.");
     }
   } catch (error) {
-    toast(`Error fetching posts: ${error}`);
+    toast(`Error fetching post: ${error}`);
   }
 };
 
