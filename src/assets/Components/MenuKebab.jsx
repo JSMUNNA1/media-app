@@ -1,14 +1,16 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prte";op-types */
 import { useEffect, useRef, useState } from "react";
 import menuKebab from "../../assets/menu-kebab.svg";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../Redux/Action";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
+
 export default function MenuKebab({ post }) {
   const dispatch = useDispatch();
   const [isshow, setIsShow] = useState(false);
   const dropdownRef = useRef(null);
+  
   const navigator = useNavigate();
   const handleIsShow = () => {
     setIsShow((prev) => !prev);
