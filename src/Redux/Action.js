@@ -35,7 +35,7 @@ export const fetchPost = (page) => async (dispatch, getStore) => {
       const updatedPosts = page === 1 ? posts : [...existingPosts, ...posts];
       dispatch({ type: FETCH_REQUEST, payload: updatedPosts });
     } else {
-      toast("No more data available from the server.");
+      toast("No more data to fetch!");
     }
   } catch (error) {
     toast(`Error fetching post: ${error}`);
